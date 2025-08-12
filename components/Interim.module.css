@@ -44,15 +44,11 @@
   stroke-linecap: butt;
   stroke-dasharray: 1;     /* requires pathLength="1" on each path */
   stroke-dashoffset: 0;   /* start at the end */
-  animation: draw 14.4s linear infinite;
+  animation: draw-reverse 2.2s ease-in forwards;
 }
 
-@keyframes draw {
-  0%       { stroke-dashoffset: 0; }     /* start */
-  15.2778% { stroke-dashoffset: -1; }    /* draw (2.2s) */
-  50%      { stroke-dashoffset: -1; }    /* pause 5s */
-  65.2778% { stroke-dashoffset: 0; }     /* reverse draw (2.2s) */
-  100%     { stroke-dashoffset: 0; }   
+@keyframes draw-reverse {
+  to { stroke-dashoffset: -1; }  /* end → start */
 }
 
 
