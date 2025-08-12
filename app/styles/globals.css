@@ -1,0 +1,115 @@
+
+@font-face {
+  font-family: 'Vevey';
+  src: url('/font/Vevey-HumanKind.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+
+:root {
+  --green: #00A75F;
+
+  --fs: clamp(22px, calc(22px + (5 * ((100vw - 1400px) / 700))), 27px);
+  --fs-m: clamp(45px, calc(45px + (5 * ((100vw - 1400px) / 700))), 50px);
+  /*--fs: calc(9px);*/
+  --lh: 1.2em;
+
+  --bg: white;
+  --padding: 20px;
+}
+
+
+html, body {
+  padding: 0;
+  margin: 0;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Vevey', Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  font-size: var(--fs);
+ 
+  line-height: var(--lh);
+  overflow-x: hidden;
+  /*letter-spacing: 0.02em;
+  scroll-snap-type: y proximity;*/
+  scroll-behavior: smooth;
+  background-color: white;
+  color: var(--green);
+}
+
+.serif {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 400;
+}
+
+.transitionContainer {
+  position: relative;
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+.transitionContainer.page-transition {
+  opacity: 0;
+}
+
+
+
+
+
+@keyframes caretBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+ /*width */
+html::-webkit-scrollbar, body::-webkit-scrollbar  {
+  display: none !important;
+}
+
+/* For Firefox*/
+body,
+html {
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+strong {
+  font-weight: 500;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+::selection {
+  background: white;
+  color: #ff8800;
+}
+
+/* Media Queries */
+@media (max-width: 1000px){
+
+}
+
+@media (max-width: 600px){
+
+}
+
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    background-color: black;
+    color: white;
+  }
+}
