@@ -1,31 +1,53 @@
 .Interim {
   padding: calc(var(--padding) * 0.6) var(--padding);
   position: relative;
-  padding-bottom: 20vh;
+  padding-bottom: 40vh;
 }
 
-.ticketLink {
-    position: absolute;
+.ticketLink, .infos {
+    position: fixed;
     top: calc(var(--padding) * 0.6) ;
     right: var(--padding);
     display: inline-block;
+    z-index: 2;
+}
+
+.ticketLink{
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+.infos {
+    right: auto;
+    left: var(--padding);
 }
 
 .content {
     font-size: var(--fs-m);
     line-height: var(--lh);
     text-align: center;
-    margin-top: 20vh;
+    margin-top: calc(var(--lh) * 2);
 }
 
-.desktopSVG {
-  height: 95vh;
+.footer {
+    position: absolute;
+    bottom: calc(var(--padding) * 0.6);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.desktopSVG{
+  height: min(100svh, calc(100vw / 1.46));
   aspect-ratio: 1.46;
   width: auto;
-  left: calc(50% - var(--padding));
-  top: calc(var(--padding) * -2);
+  left: calc(54% - var(--padding));
   transform: translateX(-50%);
   position: relative;
+}
+
+.mobileSVG {
+  display: none;
 }
 
 .shapes path, .text path, .text ellipse {
@@ -44,16 +66,67 @@
   stroke-linecap: butt;
   stroke-dasharray: 1;     /* requires pathLength="1" on each path */
   stroke-dashoffset: 0;   /* start at the end */
-  animation: draw-reverse 8.4s ease-in infinite;
+  animation: draw-reverse 14s ease-in infinite;
 }
 
 @keyframes draw-reverse {
   0% { stroke-dashoffset: 0; } 
-  25% { stroke-dashoffset: 1; } 
-  75% { stroke-dashoffset: 1; } 
+  10% { stroke-dashoffset: 1; } 
+  70% { stroke-dashoffset: 1; } 
+    75% { stroke-dashoffset: 0; }
   100% { stroke-dashoffset: 0; } 
 }
 
+@media all and (orientation: portrait) {
+
+    .Interim {
+        padding-bottom: 20vh;
+    }
+
+    .desktopSVG {
+        display: none;
+    }
+
+    .mobileSVG {
+        display: flex;
+        position: relative;
+        top: calc(var(--lh) * 1.6);
+        height: calc(100svh - var(--lh) * 4);
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mobileSVG .wrapper{
+        width: min(calc(100vw - var(--padding) * 2), calc(calc(100svh - var(--lh) * 4) * 0.74));
+        aspect-ratio: 0.74;
+        height: auto;
+    }
+
+    .ticketLink, .infos {
+        position: absolute;
+        top: calc(var(--padding) * 0.6) ;
+        right: auto;
+        left:0;
+        width: 100%;
+        text-align: center;
+        top: calc(var(--lh) * 0.6);
+    }
+
+    .ticketLink {
+        top: calc(100svh - var(--lh) * 2);
+    }
+
+    .content {
+        font-size: var(--fs-m);
+        line-height: var(--lh);
+        text-align: center;
+        margin-top: calc(var(--lh) * 4);
+    }
+
+    
+    
+}
 
 @media all and (max-width: 600px) {
     

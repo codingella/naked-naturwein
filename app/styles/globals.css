@@ -20,6 +20,27 @@
 }
 
 
+@media all and (max-width: 770px) {
+  :root {
+    --fs-m: 35px;
+  }
+}
+
+@media all and (max-width: 500px) {
+  :root {
+    --fs-m: 28px;
+    --fs: 20px;
+  }
+}
+
+@media all and (max-width: 400px) {
+  :root {
+    --fs-m: 26px;
+    --fs: 18px;
+  }
+}
+
+
 html, body {
   padding: 0;
   margin: 0;
