@@ -42,7 +42,7 @@
   height: min(100svh, calc(100vw / 1.46));
   aspect-ratio: 1.46;
   width: auto;
-  left: calc(54% - var(--padding));
+  left: calc(53% - var(--padding));
   transform: translateX(-50%);
   position: relative;
 }
