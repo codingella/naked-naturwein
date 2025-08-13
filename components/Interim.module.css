@@ -43,12 +43,15 @@
   stroke-width: 39px;
   stroke-linecap: butt;
   stroke-dasharray: 1;     /* requires pathLength="1" on each path */
-  stroke-dashoffset: 1;   /* start at the end */
-  animation: draw-reverse 2.2s ease-in forwards;
+  stroke-dashoffset: 0;   /* start at the end */
+  animation: draw-reverse 8.4s ease-in infinite;
 }
 
 @keyframes draw-reverse {
-  to { stroke-dashoffset: 0; }  /* end → start */
+  0% { stroke-dashoffset: 0; } 
+  25% { stroke-dashoffset: 1; } 
+  75% { stroke-dashoffset: 1; } 
+  100% { stroke-dashoffset: 0; } 
 }
 
 
