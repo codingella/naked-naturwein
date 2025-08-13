@@ -1,7 +1,7 @@
 .Interim {
   padding: calc(var(--padding) * 0.6) var(--padding);
   position: relative;
-  padding-bottom: 40vh;
+  padding-bottom: 50vh;
 }
 
 .ticketLink, .infos {
@@ -28,6 +28,7 @@
     line-height: var(--lh);
     text-align: center;
     margin-top: calc(var(--lh) * 2);
+    position: relative;
 }
 
 .footer {
@@ -65,9 +66,58 @@
   stroke-width: 39px;
   stroke-linecap: butt;
   stroke-dasharray: 1;     /* requires pathLength="1" on each path */
-  stroke-dashoffset: 0;   /* start at the end */
-  animation: draw-reverse 14s ease-in infinite;
+    transition: stroke-dashoffset 2s ease;
+  transition-delay: var(--delay, 0s);
 }
+
+/* when NOT in view → instantly reset (no reverse animation) */
+.desktopSVG:not(.inView) .mask path,
+.mobileSVG:not(.inView) .mask path {
+  transition: none;
+  stroke-dashoffset: 0;
+}
+
+/* when in view → play 0 → 1 with the delays */
+.desktopSVG.inView .mask path,
+.mobileSVG.inView .mask path {
+  stroke-dashoffset: 1;
+}
+
+
+.shape1 {
+    aspect-ratio: 0.63;
+    width: 33vw;
+    height:auto;
+    position: absolute;
+    right: 3vw;
+    top: calc(var(--lh-m) * 6.2);
+}
+
+.shape2 {
+    aspect-ratio: 0.63;
+    width: 33vw;
+    height:auto;
+    position: absolute;
+    left: 0vw;
+}
+
+
+ .staggerMask path, .staggerMask path{
+    fill: none;
+  stroke: white;
+  stroke-miterlimit: 10;
+  stroke-width: 23px;
+  stroke-linecap: butt;
+  stroke-dasharray: 1;     /* requires pathLength="1" on each path */
+  stroke-dashoffset: 0;   /* start at the end */
+  transition: stroke-dashoffset 0.3s ease-in;
+  transition-delay: 0.2s;
+}
+
+ .staggerMask path {
+      stroke-width: 26px;
+}
+
 
 @keyframes draw-reverse {
   0% { stroke-dashoffset: 0; } 
@@ -128,6 +178,10 @@
     
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 1200px) {
+
+    .shape1, .shape2 {
+        display: none;
+    }
     
 }

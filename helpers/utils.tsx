@@ -1,5 +1,33 @@
-// src/components/EventPreview.tsx
+
 import React from 'react';
+import {useEffect, useRef, useState} from "react";
+
+export default function useInViewClass() {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        // true if ANY intersection; false only when fully out
+        setInView(entry.isIntersecting && entry.intersectionRatio > 0);
+      },
+      {
+        root: null,
+        rootMargin: "0px", // <- no margin; use the real viewport
+        threshold: 0,       // fires at the moment it touches/leaves
+      }
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return [ref, inView];
+}
 
 
 export function breakContentToCharacters(blocks) {

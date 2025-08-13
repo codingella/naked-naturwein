@@ -14,6 +14,7 @@
   --fs-m: clamp(45px, calc(45px + (5 * ((100vw - 1400px) / 700))), 50px);
   /*--fs: calc(9px);*/
   --lh: 1.2em;
+  --lh-m: calc(var(--fs-m) * 1.2);
 
   --bg: white;
   --padding: 20px;
@@ -58,6 +59,10 @@ html, body {
   scroll-behavior: smooth;
   background-color: white;
   color: var(--green);
+}
+
+body {
+  overflow:hidden;
 }
 
 .serif {
