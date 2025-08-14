@@ -91,6 +91,7 @@
     position: absolute;
     right: 3vw;
     top: calc(var(--lh-m) * 6.2);
+    z-index: -1;
 }
 
 .shape2 {
@@ -99,6 +100,7 @@
     height:auto;
     position: absolute;
     left: 0vw;
+    z-index: -1;
 }
 
 

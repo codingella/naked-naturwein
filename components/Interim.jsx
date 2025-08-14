@@ -261,7 +261,7 @@ const Interim = ({ content }) => {
       
 
       <div className={style.footer}>
-        <Link className={`serif`} href={'mailto:felix@zirka.space'} target='_blank'>Kontakt /</Link>
+        <Link className={`serif`} href={'mailto:kontakt@naked-naturwein.de'} target='_blank'>Kontakt /</Link>
         <Link className={`serif`} href={'https://zirka.space/legal'}  target='_blank'> Impressum</Link>
       </div>
     </div>
