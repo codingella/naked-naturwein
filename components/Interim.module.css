@@ -31,6 +31,17 @@
     position: relative;
 }
 
+.content a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+.content div {
+    z-index: 0;
+    position: relative;
+}
+
 .footer {
     position: absolute;
     bottom: calc(var(--padding) * 0.6);
@@ -86,21 +97,22 @@
 
 .shape1 {
     aspect-ratio: 0.63;
-    width: 33vw;
+    width: 31vw;
     height:auto;
-    position: absolute;
+    position: absolute !important;
     right: 3vw;
-    top: calc(var(--lh-m) * 6.2);
-    z-index: -1;
+    top: calc(var(--lh-m) * 8);
+    z-index: 0 !important;
 }
 
 .shape2 {
     aspect-ratio: 0.63;
-    width: 33vw;
+    width: 31vw;
     height:auto;
-    position: absolute;
+    position: absolute !important;
     left: 0vw;
-    z-index: -1;
+    top: calc(var(--lh-m) * -2);
+    z-index: 0 !important;
 }
 
 
