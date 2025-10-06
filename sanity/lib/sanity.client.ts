@@ -56,7 +56,27 @@ export const indexQuery = groq`*[_type == "projects"]{orderRank, slug, title, cl
 export const projectSlugsQuery = groq`*[_type == "projects"]{slug}`;
 export const projectBySlugQuery = groq`{'project': *[_type == "projects" && slug.current == $slug][0], 'projectOrder': *[_type == "projects"]{_id, orderRank, slug} | order(orderRank)}`;
 export const nextProjectBySlugQuery = groq`*[_type == "projects" && slug.current == $slug][0]{client, duration, heroMedia, heroMode, orderRank, slug, service}`;
-export const interimQuery = groq`*[_type == "interim"][0]`;
+export const interimQuery = groq`*[_type == "interim"][0]{
+  _id,
+  _type,
+  link,
+  text[]{
+    ...,
+    markDefs[]{
+      ...,
+      _type == "link" => {
+        ...,
+        // Generate a usable URL from the file OR fallback to href
+        "url": coalesce(file.asset->url, href),
+        // Expose optional download filename
+        "fileName": file.asset->originalFilename,
+        // Expose extension/size if you want
+        "fileExtension": file.asset->extension,
+        "fileSize": file.asset->size
+      }
+    }
+  }
+}`;
 
 export async function getProjectSlugs(): Promise<any> {
   if (client) {

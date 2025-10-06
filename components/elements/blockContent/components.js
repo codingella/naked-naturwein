@@ -29,25 +29,38 @@ const components = {
     ),
 
     link: ({ value, children }) => {
-      const { href } = value
+      const { href, url, fileName } = value
 
-      // If href is missing, return null
-      if (!href) return null
+      // Prefer `url` if you projected it in GROQ, otherwise fallback to href
+      const linkTarget = url || href
+      if (!linkTarget) return null
 
-      const isRelative = href.startsWith('/')
-      const isMail = href.startsWith('mailto')
+      const isRelative = linkTarget.startsWith('/')
+      const isMail = linkTarget.startsWith('mailto')
 
+      // Handle relative links (internal routing)
       if (isRelative) {
-        return <Link href={href}>{children}</Link>
+        return <Link href={linkTarget}>{children}</Link>
       }
 
-      // External link fallback
+      // Handle mailto links
+      if (isMail) {
+        return (
+          <a href={linkTarget} className="mailto">
+            {children}
+          </a>
+        )
+      }
+
+      // Handle file download (PDFs)
+      const isFile = !!fileName || linkTarget.endsWith('.pdf')
+
       return (
         <a
-          href={href}
-          className={isMail ? 'mailto' : ''}
+          href={linkTarget}
           target="_blank"
           rel="noopener noreferrer"
+          download={isFile ? fileName || true : undefined}
         >
           {children}
         </a>
