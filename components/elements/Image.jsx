@@ -10,6 +10,8 @@ export default function Img(props) {
   const ratio = getRatio(image);
   const blurUrl = urlFor(image).width(30).blur(30).auto('format').url();
 
+   console.log(alt);
+
   return (
     <div
       style={{
@@ -26,7 +28,7 @@ export default function Img(props) {
       <Image
         loader={sanityLoader}
         src={assetRef}        
-        alt={alt || 'project image'}
+        alt={alt || 'weinmesse bild'}
         placeholder="blur"
         blurDataURL={blurUrl}
      

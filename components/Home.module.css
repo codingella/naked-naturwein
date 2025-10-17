@@ -161,10 +161,7 @@
 /* truncated look */
 .nameTrunc {
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  position: relative;
-  max-width: 100%;       /* obey the grid column width */
+  position: relative;      /* obey the grid column width */
   z-index: 1;
 }
 
@@ -206,6 +203,7 @@
 
 .dropdownTitle, .winzerTitle, .menu, .sectionTitle, .schliessen, .winzerHeader span, .ticketLink {
     transition: color 0.5s ease;
+    cursor: pointer;
 }
 
 .imageSection {
@@ -365,7 +363,7 @@
         opacity: 0;
         pointer-events: none;
         top: -100%;
-         transition: top 0s 0.3s, opacity 0.3s ease 0s;
+        transition: top 0s 0.3s, opacity 0.3s ease 0s;
     }
 
     .open.mobileMenu .menu {

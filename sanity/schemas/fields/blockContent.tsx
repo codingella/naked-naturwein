@@ -16,11 +16,7 @@ const SerifDecorator = (props: {children: React.ReactNode}) => (
   </span>
 )
 
-/**
- * Reusable Link annotation:
- * - Either paste an external URL (http/https/mailto/tel/relative)
- * - OR upload a PDF file that will be hosted on Sanity CDN
- */
+
 const linkAnnotation = {
   name: 'link',
   type: 'object',
@@ -36,57 +32,7 @@ const linkAnnotation = {
       type: 'url',
       title: 'Link URL',
       description:
-        'Supports http/https, mailto, tel, or relative paths like "/imprint". Leave empty if you upload a PDF.',
-      hidden: ({parent}: any) => !!parent?.file,
-      validation: (Rule: any) =>
-        Rule.uri({
-          scheme: ['http', 'https', 'mailto', 'tel'],
-          allowRelative: true,
-        }),
-    },
-    {
-      name: 'file',
-      type: 'file',
-      title: 'PDF file',
-      description: 'Upload a PDF to link to (served via Sanity CDN). Leave empty if you use URL.',
-      options: {
-        storeOriginalFilename: true,
-        accept: 'application/pdf',
-      },
-      hidden: ({parent}: any) => !!parent?.href,
-    },
-    /*{
-      name: 'openInNewTab',
-      type: 'boolean',
-      title: 'Open in new tab?',
-      initialValue: true,
-    },*/
-  ],
-  // Require at least one of href or file
-  validation: (Rule: any) =>
-    Rule.custom((val: any) => {
-      if (!val) return 'Provide a URL or upload a PDF.'
-      if (!val.href && !val.file) return 'Provide a URL or upload a PDF.'
-      return true
-    }),
-}
-
-const link = {
-  name: 'linkObject',
-  type: 'object',
-  title: 'Link',
-    options: {
-    modal: {
-      type: 'dialog',     // 'dialog' = larger, scrollable. 'popover' = small
-      width: 'large',     // 'small' | 'medium' | 'large' | 'full'
-    }},
-  fields: [
-    {
-      name: 'href',
-      type: 'url',
-      title: 'Link URL',
-      description:
-        'Supports http/https, mailto, tel, or relative paths like "/imprint". Leave empty if you upload a PDF.',
+        'Supports http/https, mailto, tel, or relative paths like "/imprint".',
       hidden: ({parent}: any) => !!parent?.file,
       validation: (Rule: any) =>
         Rule.uri({
@@ -98,8 +44,8 @@ const link = {
   // Require at least one of href or file
   validation: (Rule: any) =>
     Rule.custom((val: any) => {
-      if (!val) return 'Provide a URL or upload a PDF.'
-      if (!val.href && !val.file) return 'Provide a URL or upload a PDF.'
+      if (!val) return 'Provide a URL'
+      if (!val.href && !val.file) return 'Provide a URL'
       return true
     }),
 }
@@ -140,8 +86,10 @@ export const blockContentSimple = defineType({
       ],
       lists: [/*{ title: "Bullet", value: "bullet" }*/],
       marks: {
-        decorators: [{ title: 'Serif', value: 'serif', icon: SerifIcon, component: SerifDecorator }],
-        annotations: [link],
+        decorators: [
+          { title: "Italic", value: "em" },
+        ],
+        annotations: [linkAnnotation],
       },
     },
   ],

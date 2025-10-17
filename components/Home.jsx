@@ -161,7 +161,7 @@ const DropdownSection = ({items}) => {
             <div className={style.dropdownContent}>
               {it.image && 
               <div className={style.dropdownImage}>
-                <Media media={{type: 'image', image: it.image}} fit="cover" /> 
+                <Media media={{type: 'image', image: it.image, alt: it.image.alt}} sizes={'400px'} loading={'eager'} fit="cover" /> 
               </div>}
               {it.description && <Content blocks={it.description} />}
             </div>
@@ -284,14 +284,14 @@ const WinzerSection = ({ winzers }) =>{
                 <div className={style.dropdownContent}>
                   {w.image && (
                     <div className={style.dropdownImage}>
-                      <Media media={{ type: 'image', image: w.image }} fit="cover" />
+                      <Media media={{ type: 'image', image: w.image, alt: w.image.alt }} sizes={'500px'} loading={'eager'} fit="cover" />
                     </div>
                   )}
                   {w.description && (
                     <ContentWithInline
                       blocks={w.description}
                       appendInlineEnd={
-                        <span
+                        <p
                           className={style.schliessen}
                           onClick={() => setOpenId(null)}
                           role="button"
@@ -302,7 +302,7 @@ const WinzerSection = ({ winzers }) =>{
                           aria-label="Beschreibung schließen"
                         >
                           (schließen)
-                        </span>
+                        </p>
                       }
                     />
                   )}
@@ -330,7 +330,7 @@ const ImageSection = ({images}) => {
         if(img.asset) return(
           <div className={`${style.imageWrapper} ${landscape ? style.landscape : style.portrait}`} key={img._key || idx}>
             <div className={style.bg}/>
-            <Media media={{type: 'image', image: img}} fit="cover" /> 
+            <Media media={{type: 'image', image: img, alt: img.alt}} sizes={'1000px'} fit="cover" /> 
           </div>
         )
       })}
