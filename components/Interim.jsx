@@ -16,7 +16,7 @@ const Interim = ({ content }) => {
 
   return (
     <div className={`${style.Interim}`}>
-      <p className={`${style.infos} serif`}>Demnächst mehr Infos. Test</p>
+      <p className={`${style.infos} serif`}>Demnächst mehr Infos.</p>
       {link && 
         <Link href={link}  target='_blank' className={`${style.ticketLink} serif`}>
           Tickets

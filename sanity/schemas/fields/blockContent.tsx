@@ -25,6 +25,11 @@ const linkAnnotation = {
   name: 'link',
   type: 'object',
   title: 'Link',
+    options: {
+    modal: {
+      type: 'dialog',     // 'dialog' = larger, scrollable. 'popover' = small
+      width: 'large',     // 'small' | 'medium' | 'large' | 'full'
+    }},
   fields: [
     {
       name: 'href',
@@ -50,17 +55,44 @@ const linkAnnotation = {
       },
       hidden: ({parent}: any) => !!parent?.href,
     },
-    {
+    /*{
       name: 'openInNewTab',
       type: 'boolean',
       title: 'Open in new tab?',
       initialValue: true,
-    },
+    },*/
+  ],
+  // Require at least one of href or file
+  validation: (Rule: any) =>
+    Rule.custom((val: any) => {
+      if (!val) return 'Provide a URL or upload a PDF.'
+      if (!val.href && !val.file) return 'Provide a URL or upload a PDF.'
+      return true
+    }),
+}
+
+const link = {
+  name: 'linkObject',
+  type: 'object',
+  title: 'Link',
+    options: {
+    modal: {
+      type: 'dialog',     // 'dialog' = larger, scrollable. 'popover' = small
+      width: 'large',     // 'small' | 'medium' | 'large' | 'full'
+    }},
+  fields: [
     {
-      name: 'downloadFilename',
-      type: 'string',
-      title: 'Download filename (optional)',
-      description: 'Set a custom filename for downloads (only used when rendering with download).',
+      name: 'href',
+      type: 'url',
+      title: 'Link URL',
+      description:
+        'Supports http/https, mailto, tel, or relative paths like "/imprint". Leave empty if you upload a PDF.',
+      hidden: ({parent}: any) => !!parent?.file,
+      validation: (Rule: any) =>
+        Rule.uri({
+          scheme: ['http', 'https', 'mailto', 'tel'],
+          allowRelative: true,
+        }),
     },
   ],
   // Require at least one of href or file
@@ -71,6 +103,10 @@ const linkAnnotation = {
       return true
     }),
 }
+
+
+
+
 
 export const blockContent = defineType({
   name: 'blockContent',
@@ -104,31 +140,8 @@ export const blockContentSimple = defineType({
       ],
       lists: [/*{ title: "Bullet", value: "bullet" }*/],
       marks: {
-        decorators: [
-         
-          ],
-        annotations: [
-          {
-            name: "link",
-            type: "object",
-            title: "Link",
-            fields: [
-              {
-                name: "href",
-                type: "url",
-                title: "Link URL",
-                description:
-                  'Supports full URLs (e.g. "https://..."), mailto, tel, or relative paths like "/legal".',
-                validation: Rule =>
-                  Rule.uri({
-                    scheme: ["http", "https", "mailto", "tel"],
-                    allowRelative: true,
-                    relativeOnly: false, // this allows *both* relative and absolute URLs
-                  }).required(),
-              },
-            ],
-          },
-        ]
+        decorators: [{ title: 'Serif', value: 'serif', icon: SerifIcon, component: SerifDecorator }],
+        annotations: [link],
       },
     },
   ],

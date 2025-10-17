@@ -1,14 +1,9 @@
-import Img from './image/Image'
-import Vimeo from './Vimeo'
-import VimeoThumbnail from './VimeoThumbnail'
-
-// 👇 Dynamically import the client-only Vimeo component
+import Img from './Image'
+import Video from './Video'
 
 const Media = (props) => {
-const {media, thumbnail} = props;
+const {media} = props;
   const {type, video, image} = media || null;
-
- // console.log(thumbnail)
 
   return (
     <> 
@@ -17,12 +12,8 @@ const {media, thumbnail} = props;
         <Img {...props} />
       }
       {
-        (type == 'video' && video && !thumbnail) &&
-        <Vimeo {...props} />
-      }
-      {
-        (type == 'video' && video && thumbnail) &&
-        <VimeoThumbnail {...props} />
+        (type == 'video' && video) &&
+        <Video {...props} />
       }
     </>
   );

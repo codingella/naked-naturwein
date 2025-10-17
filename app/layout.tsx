@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import './styles/globals.css'
 import { getSettings} from "../sanity/lib/sanity.client";
 import { getMetadata } from "../components/elements/Metadata";
-
+import {SizeProvider} from '../contexts/SizeContext'
 
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,7 +25,9 @@ export default async function RootLayout({ children }) {
           <link rel="stylesheet" href="https://use.typekit.net/hxi6dsv.css"></link>
         </head>
         <body>
-        {children}
+          <SizeProvider>
+          {children}
+        </SizeProvider>
        
         </body>
       </html>

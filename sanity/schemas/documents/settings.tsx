@@ -5,6 +5,11 @@ export const settings = defineType({
   title: "Settings",
   type: "document",
   fields: [
+        {
+      name:'link',
+      type: 'url',
+      title: 'Ticketlink'
+    },
     {
       type: 'defaultseo',
       name: 'defaultseo',

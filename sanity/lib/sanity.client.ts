@@ -17,8 +17,8 @@ export const client = projectId
   : null
 
 export const homeQuery = groq`{
-  'showreel': *[_type == "showreel"][0],
-  'projects': *[_type == "projects"]{orderRank, slug, title, duration, client, service, heroLayout, heroMedia, heroMediaMobile, heroMode} | order(orderRank), 
+  'settings': *[_type == "settings"][0],
+  'content': *[_type == "section"] | order(orderRank), 
 }
 `
 const settingsQuery=`{'settings': *[_type == "settings"][0], 'projects': *[_type == "projects"]{slug, client}}`;

@@ -25,8 +25,10 @@
       "@components/*": ["components/*"],
       "@lib/*": ["sanity/lib/*"],
       "@plugins/*": ["sanity/plugins/*"],
+      "@contexts/*": ["contexts/*"],
+      "@helpers/*": ["helpers/*"],
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/PageTransitionWrapper.jsx", "components/AnimationLink.jsx", "sanity/schemas/podcasts.js", "sanity/schemas/index.js", "sanity/schemas/fields/dates.jsx", "sanity/schemas/documents/events.jsx", "sanity/schemas/documents/collections.jsx", "sanity/schemas/documents/feed.jsx", "sanity/schemas/fields/section.jsx", "components/elements/blockContent/Content.js", "components/elements/image/ClientImage.jsx", "sanity/schemas/fields/section.jsx", "components/elements/image/Image.jsx", "components/elements/Carousel.jsx", "components/NewsItem.jsx", "sanity/schemas/documents/projects.jsx", "components/Home.jsx", "sanity/schemas/fields/listItem.jsx", "components/Project.jsx", "components/Menu.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/PageTransitionWrapper.jsx", "components/AnimationLink.jsx", "sanity/schemas/podcasts.js", "sanity/schemas/index.js", "sanity/schemas/fields/dates.jsx", "sanity/schemas/documents/events.jsx", "sanity/schemas/documents/collections.jsx", "sanity/schemas/documents/feed.jsx", "sanity/schemas/fields/section.jsx", "components/elements/blockContent/Content.js", "components/elements/image/ClientImage.jsx", "sanity/schemas/fields/section.jsx", "components/elements/Image.jsx", "components/elements/Carousel.jsx", "components/NewsItem.jsx", "sanity/schemas/documents/projects.jsx", "components/Home.jsx", "sanity/schemas/fields/listItem.jsx", "components/Project.jsx", "components/Menu.jsx"],
   "exclude": ["node_modules"]
 }

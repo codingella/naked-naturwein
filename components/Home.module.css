@@ -1,20 +1,7 @@
 .Home {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    min-height: stretch;
-    min-height: -webkit-stretch;
-    height: 100svh;
-
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    -webkit-scroll-snap-type: y mandatory;
-    -ms-scroll-snap-type: y mandatory;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
+    padding: var(--padding);
+    position: relative;
+    width: 100vw;
 }
 
 .Home::-webkit-scrollbar, .Home::-webkit-scrollbar  {
@@ -26,60 +13,502 @@
     -ms-overflow-style: none; 
 }
 
-.projectInfo{
+.menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: var(--padding);
+    left: var(--padding);
+    
+}
+
+.menu, .sectionTitle {
+    font-size: calc(var(--fs) * 0.85);
+    text-transform: uppercase;
+    z-index: 3;
+    font-weight: 400;
+    font-family: 'Times Small', serif;
+    width: 17em;
+}
+
+.ticketLink {
     position: fixed;
-    top: 0;
-    z-index: 10;
+    top: var(--padding);
+    right: var(--padding);
+    font-size: calc(var(--fs) * 0.85);
+    text-transform: uppercase;
+    z-index: 15;
+    font-weight: 400;
+    font-family: 'Times Small', serif;
+    text-align: right;
+}
+
+.sections {
+    display: flex;
+    flex-direction: column;
+}
+
+.section {
+    display: contents; 
+}
+
+.section:last-child .sectionContent {
+    min-height: calc(100svh - 3 * var(--padding));
+    margin-bottom: 0;
+}
+
+.sectionTitle {
+  display: block;              /* sticky likes block-level */
+  position: sticky;
+  top: calc(var(--padding) + var(--offset, 0px)); /* adjust for header */
+  z-index: 2;                  /* stay above content */
+}
+
+.sectionContent { 
     display: grid;
-    grid-template-columns: var(--grid);
-    grid-gap: var(--padding-h);
-    padding: var(--padding-v) var(--padding-h);
-    flex-direction: row;
-    width: 100%;
-    color: white;
-    line-height: var(--lh-s);
-
-    opacity: 0;
-    transition: opacity 0s 0.2s;
+    align-self: center;
+    width: calc(100% - 30em);
+    max-width: 1200px;
+    position: relative;
+    top: calc(-1.25em - var(--padding));
+    padding-top: var(--padding);
+    margin-bottom: calc(var(--lh) * 4);
 }
 
-.projectInfo.light {
-    color: black;
+@media all and (max-width: 2000px) {
+    .sectionContent { 
+        max-width: 1000px;
+    }
 }
 
-.showreel .projectInfo {
-    transition: opacity 0s 0s;
+@media all and (max-width: 1650px) {
+    .sectionContent { 
+        max-width: 800px;
+    }
 }
 
-.active .projectInfo{
+.dropdown {}
+
+.dropdownTitle {
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* left label | dots | right label */
+    align-items: baseline;
+    cursor: pointer;
+    user-select: none;
+    gap: 0.2em;
+}
+
+.dots {
+  grid-column: 2;
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+.dots::before {
+  content:
+    '................................................................................................................................................................................................................................................................................';
+}
+
+.collabsable{
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+.dropdownContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--lh) 50px;  
+}
+
+.dropdownImage {
+    width: 15em;
+    height: 15em;
+    background-color: var(--green);
+    margin-bottom: var(--lh);
+}
+
+.dropdownImage img, .imageWrapper img {
+    mix-blend-mode: screen;
+    -webkit-filter: grayscale(100%) contrast(120%);
+    filter: grayscale(100%) contrast(120%);
     opacity: 1;
 }
 
-.projectInfo span {
-    text-transform: uppercase;
+.winzerList {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto; /* left label | dots | right label */
+    column-gap: var(--lh);
 }
 
-.client {
-    grid-column: 2 / 4;
+.winzer {
+    display: contents;
 }
 
-.title {
-    grid-column: 4 / 6;
+.winzerTitle {
+    display: grid;
+    grid-template-columns: subgrid;  /* 👈 reuse winzerList columns */
+    grid-column: 1 / -1;             /* span all parent columns */
+    align-items: baseline;
+    cursor: pointer;
+    user-select: none;
+    gap: var(--lh);
+    position: relative;
 }
 
-.service {
-    grid-column: 6 / 8;
+/* truncated look */
+.nameTrunc {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  max-width: 100%;       /* obey the grid column width */
+  z-index: 1;
+}
+
+/* on hover, paint the full text as an absolutely-positioned overlay */
+.winzerTitle:hover .nameTrunc::after {
+  content: attr(data-full);
+  position: absolute;
+  inset: 0 auto auto 0;   /* top-left */
+  white-space: nowrap;
+  z-index: 999;           /* above neighbors */
+  background: var(--bg, #fff);   /* match your row background */
+  padding-right: .25em;   /* tiny padding so it fully covers */
+  pointer-events: none;   /* keep click behavior on the row */
+}
+
+.winzerTitle span:last-child {
+    padding-right: 2em;
+}
+
+.winzerList .collabsable {
+     grid-column: 1 / -1;  
+}
+
+.dropdownTitle:hover, .winzerTitle:hover, .menu a:hover, .sectionTitle:hover, .schliessen:hover, .winzerHeader span:hover, .ticketLink:hover  {
+    color: #867bc4;
+}
+
+.winzerHeader:hover, .empty:hover {
+    color: var(--green) !important;
+}
+
+.empty{
+    cursor: default !important;
+}
+
+.winzerHeader{
+    margin-bottom: var(--lh);
+}
+
+.dropdownTitle, .winzerTitle, .menu, .sectionTitle, .schliessen, .winzerHeader span, .ticketLink {
+    transition: color 0.5s ease;
+}
+
+.imageSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 110%;
+    position: relative;
+    left: -5%;
+}
+
+.imageWrapper {
+    overflow: hidden;
+    padding: 5px;
+    position: relative;
+}
+
+.imageWrapper .bg {
+     background-color: var(--green);
+     width: calc(100% - 10px);
+     height: calc(100% - 10px);
+     top: 5px;
+     left: 5px;
+     position: absolute;
+}
+
+.landscape {
+  grid-column: span 2;
+  aspect-ratio: 3 / 2;
+}
+
+/* Portrait: 1 column wide, same height as landscape tiles -> 3:4 ratio */
+.portrait {
+  grid-column: span 1;
+  aspect-ratio: 3 / 4;
+}
+
+.header {
+    width: 100%;
+    height: calc(100svh - 2 * var(--padding));
+    margin-bottom: calc(var(--padding) * 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.desktopSVG{
+  height: min(92svh, calc((100vw - var(--padding) * 2) / 1.77));
+  aspect-ratio: 1.77;
+  width: auto;
+  top: 0;
+  position: relative;
+}
+
+.mobileSVG{
+    position: relative;
+    width: min(calc(100vw - var(--padding) * 2), calc(calc(100svh - var(--lh) * 4) * 0.70));
+    aspect-ratio: 0.74;
+    height: auto;
+}
+
+.path {
+    opacity: 0.7;
+}
+
+.mask path {
+  fill: none;
+  stroke: white;
+  stroke-miterlimit: 10;
+  stroke-width: 62px;
+  stroke-linecap: butt;
+  stroke-dasharray: 1;     /* requires pathLength="1" on each path */
+}
+
+/* when NOT in view → instantly reset (no reverse animation) */
+.desktopSVG:not(.inView) .mask path,
+.mobileSVG:not(.inView) .mask path {
+  transition: none !important;
+  stroke-dashoffset: 1;
+}
+
+/* when in view → play 0 → 1 with the delays */
+.desktopSVG.inView .mask path,
+.mobileSVG.inView .mask path {
+  stroke-dashoffset: 0;
 }
 
 
-.duration {
-    padding-left: calc(100% - 4.5em);
+.letters > path {
+  filter: hue-rotate(0deg);
+  
+  transition: filter 1s ease 0.5s;
+  cursor: pointer;
 }
 
+.letters > path:hover {
+  filter: hue-rotate(110deg);
+   transition: filter 1s ease 0s;
+}
 
+.mobileSVG, .mobileInfo, .winzerList .dots, .mobileMenu {
+    display: none;
+}
 
-@media all and (max-width: 600px) {
-    .projectInfo {
+@media all and (hover: none) {
+    .dropdownTitle:hover, .winzerTitle:hover, .menu a:hover, .sectionTitle:hover, .schliessen:hover, .winzerHeader span:hover, .ticketLink:hover  {
+        color: var(--green);
+    }
+}
+
+@media all and (orientation: portrait) {
+    .desktopSVG {
         display: none;
     }
+
+    .mobileSVG {
+        display: block;
+    }
+}
+
+@media all and (max-width: 1023px) {
+    .Home {
+        overflow-x:hidden;
+    }
+
+    .menu {
+        display:none;
+    }
+
+    .mobileMenu{
+        display: block;
+        height: calc(var(--fs) * 0.85 + 50px);
+         background: linear-gradient(to bottom, #fff 0%,  #fff 60%, rgba(255,255,255,0) 100%);
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+    }
+
+    .ticketLink {
+        top: 10px;
+    }
+
+    .mobileMenu .menu {
+        position: fixed;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        padding-bottom: 50px;;
+        background-color: rgba(255,255,255, 0.9);
+        text-align: center;
+        row-gap: 5px;
+        opacity: 0;
+        pointer-events: none;
+        top: -100%;
+         transition: top 0s 0.3s, opacity 0.3s ease 0s;
+    }
+
+    .open.mobileMenu .menu {
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+        top: 0;
+        transition: top 0s 0s, opacity 0.3s ease 0.1s;
+    }
+
+    .burger {
+        position: fixed;
+        height: calc(var(--fs) * 0.85 + 30px);
+        width: calc(var(--fs) * 0.85 + 30px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 5;
+        left: 5px;
+        top: -3px;
+    }
+
+    .topStroke, .bottomStroke, .open .topStroke, .open .bottomStroke {
+        transform-origin: center;
+        transition: transform 0.3s ease;
+    }
+
+    .open .bottomStroke {
+        transform: rotate(-205deg) translateY(-4px);
+    }
+
+    .open .topStroke {
+        transform: rotate(205deg) translateY(4px);
+    }
+
+    .sections {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .section {
+        display: block; 
+        padding-top: calc(3 * var(--lh));
+    }
+
+    .sectionTitle {
+        display: block;             
+        position: static;
+        top: 0;  
+        pointer-events: none;        
+    }
+
+    .sectionContent { 
+        display: block;
+        align-self: normal;
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+        top: 0;
+        padding-top: var(--padding);
+        margin-bottom: var(--lh);
+    }
+
+    .sectionTitle:hover {
+        color: var(--green);
+    }
+
+    .sectionTitle, .sectionTitle a {
+        cursor: default;
+    }
+
+    .imageSection {
+        width: calc(100% + 10px);
+        left:-5px;
+    }
+
+}
+
+@media all and (max-width: 600px) {
+    .winzerList {
+        grid-template-columns: 1fr 1fr auto;
+    }
+
+    .wineStore {
+        display: none;
+    }
+
+    .mobileInfo {
+        display: block;
+        padding-right: 0 !important;
+        text-align: right;
+        width: 5em;
+    }
+
+    .schliessen {
+       display: none !important;
+    }
+
+    .dropdownContent {
+        padding: var(--lh) 20px;
+    }
+
+    .imageSection {
+        display: block;
+    }
+
+}
+
+@media all and (max-width: 400px) {
+    .winzerList {
+    grid-template-columns: 1fr;
+    align-items: baseline;
+    }
+
+    .winzerTitle {
+    display: grid;
+    gap: 0.3em;
+        grid-template-columns: auto 1fr auto;
+    }
+
+      .mobileInfo {
+        width: auto;
+    }
+
+    .region {
+        display: none;
+    }
+
+    .mobileInfo {
+        display: block;
+        padding-right: 0 !important;
+    }
+
+    .winzerList .dots {
+        display:block;
+    }
+
+    .dropdownImage {
+        max-width: 100%;
+        aspect-ratio: 1;
+        height: auto;
+    }
+
+
+
 }

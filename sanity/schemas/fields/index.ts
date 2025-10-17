@@ -2,7 +2,8 @@
 export * from "./blockContent";
 export * from "./link";
 export * from "./seo";
-export * from "./media";
+export * from "./winzer";
+export * from "./dropdownItem";
 
 
 

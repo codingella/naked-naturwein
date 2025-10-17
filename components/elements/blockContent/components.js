@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import BlockText from './BlockText'
-import Img from '../image/Image'
+import Img from '../Image'
 
 const components = {
   undefined: (props) => {

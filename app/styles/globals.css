@@ -6,40 +6,46 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Times Small';
+  src:
+    url('/font/TimesSmallTextMTStd.woff2') format('woff2'),
+    url('/font/TimesSmallTextMTStd.woff') format('woff'),
+    url('/font/TimesSmallTextMTStd.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Times Small';
+  src: url('/font/TimesSmallTextMTStd-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
 
 :root {
   --green: #00A75F;
 
-  --fs: clamp(22px, calc(22px + (5 * ((100vw - 1400px) / 700))), 27px);
-  --fs-m: clamp(45px, calc(45px + (5 * ((100vw - 1400px) / 700))), 50px);
+  /*--fs: clamp(22px, calc(22px + (5 * ((100vw - 1400px) / 700))), 27px);*/
+  --fs: clamp(15px, calc(15px + 7 * ((100vw - 1400px) / 800)), 23px);
   /*--fs: calc(9px);*/
   --lh: 1.2em;
-  --lh-m: calc(var(--fs-m) * 1.2);
 
   --bg: white;
   --padding: 20px;
+  --sectionM: var(5em);
 }
 
-
-@media all and (max-width: 770px) {
+@media all and (max-width: 500px){
   :root {
-    --fs-m: 35px;
+    --fs: 14px;
+    --padding: 12px;
   }
 }
 
-@media all and (max-width: 500px) {
-  :root {
-    --fs-m: 28px;
-    --fs: 20px;
-  }
-}
 
-@media all and (max-width: 400px) {
-  :root {
-    --fs-m: 26px;
-    --fs: 18px;
-  }
-}
 
 
 html, body {
@@ -48,21 +54,16 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
-  font-family: 'Vevey', Helvetica, Arial, sans-serif;
-  font-weight: 600;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 400;
   font-size: var(--fs);
  
   line-height: var(--lh);
-  overflow-x: hidden;
   /*letter-spacing: 0.02em;
   scroll-snap-type: y proximity;*/
   scroll-behavior: smooth;
   background-color: white;
   color: var(--green);
-}
-
-body {
-  overflow:hidden;
 }
 
 .serif {
@@ -80,14 +81,6 @@ body {
   opacity: 0;
 }
 
-
-
-
-
-@keyframes caretBlink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
 
  /*width */
 html::-webkit-scrollbar, body::-webkit-scrollbar  {
@@ -117,16 +110,7 @@ a {
 
 ::selection {
   background: white;
-  color: #ff8800;
-}
-
-/* Media Queries */
-@media (max-width: 1000px){
-
-}
-
-@media (max-width: 600px){
-
+  color: #867bc4;
 }
 
 

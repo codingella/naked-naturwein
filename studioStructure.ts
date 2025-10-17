@@ -8,9 +8,17 @@ export const StudioStructure = (S : StructureBuilder, context) =>
 S.list()
 .title('Desk')
 .items([
+       // Regular document types, allows multiple documents
+  orderableDocumentListDeskItem({
+      type: "section",
+      title: "Abschnitte",
+      icon: ComposeIcon,
+      S,
+      context,
+    }),
   //Single Page Document
   S.listItem()
-  .title("Interrim")
+  .title("Interrim (alt)")
   .id("interrim")
   .icon(ComposeIcon)
   .child(
@@ -19,37 +27,8 @@ S.list()
       .documentId("interim")
       .title("Interim")
   ),
-     // Regular document types, allows multiple documents
-    /*orderableDocumentListDeskItem({
-      type: "projects",
-      title: "Projects",
-      icon: ComposeIcon,
-      S,
-      context,
-    }),*/
 
-    // ... all other desk items
-    /*Single Page Document
-     S.listItem()
-     .title("About")
-     .id("about")
-     .icon(UserIcon)
-     .child(
-       S.document()
-         .schemaType("about")
-         .documentId("about")
-         .title("About")
-     ),
-     S.listItem()
-     .title("Legal")
-     .id("legal")
-     .icon(CaseIcon)
-     .child(
-       S.document()
-         .schemaType("legal")
-         .documentId("legal")
-         .title("Legal")
-     ),*/
+
     S.divider(),
     //Single Page Document
     S.listItem()

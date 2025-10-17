@@ -1,0 +1,42 @@
+.Content p {
+  margin-bottom: var(--lh);
+  min-height: var(--lh);
+}
+
+.Content p:last-child {
+  margin-bottom: 0;
+}
+
+.Content a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 0.5s ease;
+}
+
+.Content a:hover{
+  color: #867bc4;
+}
+
+/* Project specific */
+.inlineAppend {
+  display: inline;
+  margin-left: .5ch;
+  white-space: nowrap;
+}
+.inlineAppend :where(button, a, span) {
+  all: unset;             /* keep it looking like text */
+  cursor: pointer;
+}
+.inlineAppend :where(button):focus-visible,
+.inlineAppend :where(a):focus-visible,
+.inlineAppend :where(span):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+
+@media all and (max-width: 600px) {
+
+
+}
