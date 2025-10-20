@@ -41,14 +41,11 @@ export const ContentWithInline = ({
           block: {
             // append only when the last block is a normal paragraph
             normal: ({ children }) => (
-              <>
-                <br />
-                <span>
-                  {children}
-                  {/* inline, no extra line break */}
-                  <span className={style.inlineAppend}>{appendInlineEnd}</span>
-                </span>
-              </>
+              <span>
+                {children}
+                {/* inline, no extra line break */}
+                <span className={style.inlineAppend}>{appendInlineEnd}</span>
+              </span>
             ),
           },
         }}
