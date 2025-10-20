@@ -10,7 +10,6 @@ export default function Img(props) {
   const ratio = getRatio(image);
   const blurUrl = urlFor(image).width(30).blur(30).auto('format').url();
 
-   console.log(alt);
 
   return (
     <div
