@@ -151,7 +151,7 @@ const DropdownSection = ({items}) => {
       {items.map((it, idx) => (
         <div key={it._key || idx}>
           <div className={style.dropdownTitle} onClick={() => setOpenIndex(idx === openIndex ? null : idx)}>
-            <span>{it.title}</span>
+            <span className={style.dropdownTitleString}>{it.title}</span>
             <span className={style.dots}/>
             {(it.description || it.image )&& <span>{`( ${idx == openIndex ? 'schließen' : 'Info'} )`}</span>}
           </div>

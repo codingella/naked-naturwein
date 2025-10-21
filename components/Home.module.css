@@ -87,7 +87,6 @@
     }
 }
 
-.dropdown {}
 
 .dropdownTitle {
     display: grid;
@@ -479,6 +478,19 @@
     .imageSection {
         display: block;
     }
+
+    .dropdownTitleString {
+        white-space: nowrap;
+        max-width: calc(100vw - 5em);
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .dropdownTitle:hover .dropdownTitleString {
+        white-space: wrap;
+    }
+
+
 
 }
 
